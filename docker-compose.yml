@@ -1,0 +1,31 @@
+services:
+  db:
+    image: postgres:16
+    container_name: pg-db
+    restart: always
+    environment:
+      POSTGRES_USER: todo_user
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: todo_db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./initdb:/docker-entrypoint-initdb.d
+    ports:
+      - "5433:5432"
+
+  web:
+    build: .
+    container_name: fastapi-app
+    depends_on:
+      - db
+    ports:
+      - "5000:5000"
+    environment:
+      # DATABASE_URL: postgres://todo_user:secret@db:5432/todo_db
+      SECRET_KEY: ${SECRET_KEY:-189447c569350c83639d2f030e0eb21de98785d9bfe749f43bd00c82a4b560c4}
+      DATABASE_URL: postgresql://todo_user:secret@db:5432/todo_db
+    volumes:
+      - .:/app
+
+volumes:
+  pgdata:

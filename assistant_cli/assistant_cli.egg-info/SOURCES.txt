@@ -1,0 +1,12 @@
+setup.py
+assistant/__init__.py
+assistant/api_client.py
+assistant/cli.py
+assistant/config.py
+assistant/daemon.py
+assistant_cli.egg-info/PKG-INFO
+assistant_cli.egg-info/SOURCES.txt
+assistant_cli.egg-info/dependency_links.txt
+assistant_cli.egg-info/entry_points.txt
+assistant_cli.egg-info/requires.txt
+assistant_cli.egg-info/top_level.txt

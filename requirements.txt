@@ -1,0 +1,10 @@
+SQLAlchemy 
+pydantic
+pydantic-settings
+psycopg2-binary
+flask
+fastapi
+pyjwt
+passlib[bcrypt]
+uvicorn
+pydantic[email]
