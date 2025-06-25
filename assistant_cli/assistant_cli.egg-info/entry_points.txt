@@ -1,2 +1,2 @@
 [console_scripts]
-assistant = assistant_cli.assistant.cli:cli
+assistant = assistant.cli:cli

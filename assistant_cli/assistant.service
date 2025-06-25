@@ -3,11 +3,11 @@ Description=Assistant CLI Daemon
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/python3 -m assistant.daemon start
-ExecStop=/usr/bin/python3 -m assistant.daemon stop
+ExecStart=/home/verykul/micromamba/envs/todo_agent/bin/python -m assistant_cli.daemon start
+ExecStop=/home/verykul/micromamba/envs/todo_agent/bin/python -m assistant_cli.daemon stop
 Restart=always
 User=verykul
-WorkingDirectory=/home/verykul/Workspace/Projects/PA/assistant_cli/
+WorkingDirectory=/home/verykul/Workspace/Projects/PA/assistant_cli
 Environment="API_URL=http://localhost:5000"
 
 [Install]

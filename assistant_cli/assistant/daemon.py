@@ -1,8 +1,8 @@
 import requests
 import notify2
 from apscheduler.schedulers.background import BackgroundScheduler
-from .api_client import APIClient
-from .config import load_token
+from assistant.api_client import APIClient
+from assistant.config import load_token
 from datetime import datetime
 import os
 

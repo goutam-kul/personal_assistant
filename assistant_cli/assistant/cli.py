@@ -1,21 +1,24 @@
 import click
 import requests
 from datetime import datetime
-from .api_client import APIClient
-from .config import save_token
-from .daemon import start_daemon, stop_daemon
+from assistant.api_client import APIClient
+from assistant.config import save_token
+from assistant.daemon import start_daemon, stop_daemon
+from loguru import logger
 
 @click.group()
 def cli():
     pass
 
 @cli.command()
-@click.argument("email")
+@click.argument("user_id")
 @click.argument("password")
-def login(email, password):
+def login(user_id, password):
+    # logger.debug("Log in called")
     client = APIClient()
-    if client.login(email, password):
+    if client.login(user_id, password):
         if client.token is not None:
+            # logger.debug("Token found. Saving token!")
             save_token(client.token)
             click.echo("Login successful!")
     else:
@@ -64,7 +67,7 @@ def list_task():
 @click.option("--title")
 @click.option("--priority", type=int)
 @click.option("--status")
-def update(task_id, title, priority, status):
+def update(task_id, title, priority, status): #TODO: allow due_date & description
     client = APIClient()
     if not client.token:
         click.echo("Please login first.")

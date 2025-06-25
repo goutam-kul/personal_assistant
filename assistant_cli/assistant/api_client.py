@@ -1,6 +1,7 @@
 from typing import Dict
 import requests
-from .config import API_URL, load_token
+from assistant.config import API_URL, load_token
+from loguru import logger
 
 class APIClient:
     def __init__(self) -> None:
@@ -12,12 +13,18 @@ class APIClient:
     
     def login(self, user_id: str, password: str) -> bool:
         try:
+            # logger.debug("Response generating")
             response = requests.post(
                 f"{self.base_url}/auth/login",
-                data={"user_id": user_id, "password": password}
+                json={"user_id": user_id, "password": password}
             )
+            # logger.debug("response generated")
+            # logger.debug(f"Raw response: {response.json()}")
+
             response.raise_for_status()
             self.token = response.json()["access_token"]
+
+            # logger.debug(f"Token: {self.token}") 
             return True
         except requests.RequestException:
             return False
