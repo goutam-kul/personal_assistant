@@ -1,5 +1,0 @@
-click
-requests
-apscheduler
-notify2
-python-dotenv
