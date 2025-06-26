@@ -1,14 +1,22 @@
 [Unit]
 Description=Assistant CLI Daemon
 After=network.target
+Wants=network.target
 
 [Service]
-ExecStart=/home/verykul/micromamba/envs/todo_agent/bin/python -m assistant_cli.daemon start
-ExecStop=/home/verykul/micromamba/envs/todo_agent/bin/python -m assistant_cli.daemon stop
-Restart=always
+Type=simple
 User=verykul
 WorkingDirectory=/home/verykul/Workspace/Projects/PA/assistant_cli
-Environment="API_URL=http://localhost:5000"
+Environment="DISPLAY=:0"
+Environment="DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus"
+Environment="XDG_RUNTIME_DIR=/run/user/1000"
+ExecStart=/home/verykul/start_assistant_daemon.sh
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+KillMode=process
+TimeoutStopSec=20
 
 [Install]
 WantedBy=multi-user.target
